@@ -214,7 +214,7 @@ Y_combined = cbind(Y_combined,dates)
 Y_combined = as.data.frame(Y_combined)
 
 # Plot series
-library("reshape2")
+if (!require('reshape2')) install.packages('reshape2'); library('reshape2')
 library("ggplot2")
 # APA graph template 
 ##if(!"devtools" %in% rownames(installed.packages())) install.packages("devtools")

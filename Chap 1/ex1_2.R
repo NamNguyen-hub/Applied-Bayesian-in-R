@@ -89,7 +89,7 @@ EB1=apply( yhat[3:14,] , 1 , quantile , probs = quants , na.rm = TRUE )
 EB1
 
 # Plot series
-library("reshape2")
+if (!require('reshape2')) install.packages('reshape2'); library('reshape2')
 library("ggplot2")
 #if(!"devtools" %in% rownames(installed.packages())) install.packages("devtools")
 #devtools::install_github("crsh/papaja")

@@ -1,5 +1,7 @@
 # Pseudocodes
-# Limit to first 500 iterations
+# Limit to first 500 iterations 
+  ## Set reps in ex1_3 to 500
+  ## Set burns in ex1_3 to 0
 ## plot raw Gibbs sample output
 par(mfrow=c(3,2))
 df = as.data.frame(out2)
@@ -22,7 +24,7 @@ p3 <- ggplot(data= df,
        title = "B_2")
 
 df = as.data.frame(out3)
-p4 <- ggp1:lot(data= df,
+p4 <- ggplot(data= df,
             aes(x=as.numeric(row.names(df)), y=out3)) +
   geom_line() +
   labs(x = "iterations",
@@ -54,20 +56,23 @@ p1 <- ggplot(data= df,
   labs(x = "iterations",
        title = "intercept")
 p1
+
+
 df1=as.data.frame(colMeans(matrix(df[,2], 10)))
 p2 <- ggplot(data= df,
              aes(x=as.numeric(row.names(df1)), y=B_1)) +
   geom_line() +
   labs(x = "iterations",
        title = "B_1")
-df1=as.data.frame(colMeans(matrix(df[,3], 10)))
 p2
+
+
+df1=as.data.frame(colMeans(matrix(df[,3], 10)))
 p3 <- ggplot(data= df,
              aes(x=as.numeric(row.names(df1)), y=B_2)) +
   geom_line() +
   labs(x = "iterations",
        title = "B_2")
-
 
 df = as.data.frame(out3)
 df1=as.data.frame(colMeans(matrix(df[,1], 10)))
@@ -92,7 +97,7 @@ p5
 (p1|p3)/(p2|p4)/(p5|plot_spacer())
 
 ## plot acf
-par(mfrow=c(3,2))
+par(mfrow=c(2,3))
 
 df = as.data.frame(out2)
 acf(df$V1)
@@ -104,4 +109,4 @@ df = as.data.frame(out4)
 acf(df$out4)
 ## plot raw Gibbs sample output
 
-# 25000 iterations
+# Do again but for reps = 25000 iterations

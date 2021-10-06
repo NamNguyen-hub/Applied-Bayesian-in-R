@@ -1,6 +1,6 @@
 rm(list=ls())
 
-setwd("D:/OD/OneDrive/Study/29.2021 Fall/Bayesian Econometrics/Fall 2021/Chap 1")
+setwd("D:/GitHub/Applied-Bayesian-in-R/Chap 1")
 set.seed(123)
 # Data set up ####
 library(readxl)
@@ -110,12 +110,13 @@ Y_combined = as.data.frame(Y_combined)
 
 for (i in 1:10){
   Y_combined[,i]=as.numeric(Y_combined[,i])
+  Y_combined[nrow(Y),i] = Y_combined[nrow(Y),1]
 }
 
 Y_combined[,11]=as.Date(Y_combined[,11])
 
 Y_combined=subset(Y_combined, dates>as.Date("2000-01-01"))
-test_data_long <- melt(Y_combined, id="dates")  # convert to long format
+test_data_long <- reshape2::melt(Y_combined, id="dates")  # convert to long format
 
 p <- ggplot(data=test_data_long,
             aes(x=dates, y=value, colour=variable)) +

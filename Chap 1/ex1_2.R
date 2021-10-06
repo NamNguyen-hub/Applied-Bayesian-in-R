@@ -93,7 +93,7 @@ library("reshape2")
 library("ggplot2")
 #if(!"devtools" %in% rownames(installed.packages())) install.packages("devtools")
 #devtools::install_github("crsh/papaja")
-library("papaja") #APA journal graph template
+#library("papaja") #APA journal graph template
 
 ##Combine series
 T_combined = nrow(Y)+12
@@ -124,4 +124,4 @@ p <- ggplot(data=test_data_long,
   labs(x = "dates", y = "inflation",
                title = "Forecast of inflation")
 p
-p + theme_apa()
+#p + theme_apa()

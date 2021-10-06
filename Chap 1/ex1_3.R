@@ -41,14 +41,14 @@ Sigma0r =1
 B = B0
 rho=rho0
 sigma2 =1
-reps = 5000 #samples to be saved for inference
-burn = 4000 #throwing off
+reps = 15000 #samples to be saved for inference
+burn = 12000 #throwing off
 out1 = matrix(0,14,reps)
 out2 = matrix(0,reps,3)
 out3 = c()
 out4 = c()
-xstar = matrix(0,(nrow(X)-1),3)
 
+xstar = matrix(0,(nrow(X)-1),3)
 xlag0 = as.matrix(X[2:t,])
 xlag1 = as.matrix(X[1:(t-1),])
 ## Loop
@@ -206,49 +206,25 @@ T_combined = nrow(Y)+12
 Y_combined=matrix(NA,T_combined,10)
 Y_combined[1:nrow(Y),1]=Y
 Y_combined[(nrow(Y)+1):(nrow(Y)+12),2:10]=t(EB1)
-##Convert to time series
 ##Set date and variable
-
-# Example codes: https://www.statmethods.net/advstats/timeseries.html
-# # from Jan 2009 to Dec 2014 as a time series object
-# myts <- ts(myvector, start=c(2009, 1), end=c(2014, 12), frequency=12)
-#
-# # subset the time series (June 2014 to December 2014)
-# myts2 <- window(myts, start=c(2014, 6), end=c(2014, 12))
-#
-# # plot series
-# plot(myts)
-
 dates = seq(as.Date("1948-01-01"), by = "quarter", length.out = 262)
 dates = as.character(dates)
-
+##Convert to data frame with date column
 Y_combined = cbind(Y_combined,dates)
 Y_combined = as.data.frame(Y_combined)
-myts <- ts(Y_combined, start=c(1948, 1), frequency=12)
 
 # Plot series
 library("reshape2")
 library("ggplot2")
-#if(!"devtools" %in% rownames(installed.packages())) install.packages("devtools")
-#devtools::install_github("crsh/papaja")
-# library("papaja") #APA journal graph template
-
-##Combine series
-T_combined = nrow(Y)+12
-Y_combined=matrix(NA,T_combined,10)
-Y_combined[1:nrow(Y),1]=Y
-Y_combined[(nrow(Y)+1):(nrow(Y)+12),2:10]=t(EB1)
-##Convert to data frame with date column
-dates = seq(as.Date("1948-01-01"), by = "quarter", length.out = 262)
-dates = as.character(dates)
-
-Y_combined = cbind(Y_combined,dates)
-Y_combined = as.data.frame(Y_combined)
+# APA graph template 
+##if(!"devtools" %in% rownames(installed.packages())) install.packages("devtools")
+##devtools::install_github("crsh/papaja")
+##library("papaja") #APA journal graph template
 
 
 for (i in 1:10){
   Y_combined[,i]=as.numeric(Y_combined[,i])
-  Y_combined[nrow(Y),i] = Y_combined[nrow(Y),1]
+  Y_combined[nrow(Y),i] = Y_combined[nrow(Y),1] #Connect two series in graph
 }
 
 Y_combined[,11]=as.Date(Y_combined[,11])
